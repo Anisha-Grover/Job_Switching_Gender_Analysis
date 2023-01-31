@@ -1,0 +1,64 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ### Description of the Data Files in python_sample/data/interim folder\
+\
+Each person surveyed is identified by a unique `PERSON_ID`. If a file contains information that varies with time, then a `Calendar_Year` column (which maybe different from the survey year) is also present.\
+\
+#### age_data.csv\
+\
+* Columns: PERSON_ID, Calendar_Year and Age.\
+* Key: `PERSON_ID * Calendar_Year`.\
+* `Age` which is an integer variable was created by using date of birth information from survey data.\
+\
+\
+#### gender_data.csv\
+\
+* Columns: PERSON_ID and Gender.\
+* Key: `PERSON_ID`.\
+* The data captures only two genders. `Gender` column is a binary variable that takes value 1 for males and 2 for females.\
+\
+\
+#### highest_grade_completed_data.csv\
+\
+* Columns: PERSON_ID and Max_Education.\
+* Key: `PERSON_ID`.\
+* `Max_Education` column contains integers indicating the maximum years of education for the respondents.\
+\
+\
+#### job_history_data.csv\
+\
+* This file contains secondary variables i.e. variables that are not directly available in the survey data but have been derived from it.\
+* Columns: PERSON_ID, Calendar_Year, Job_ID, Start_Year and Stop_Year.\
+* Key: `PERSON_ID * Calendar_Year * Job_ID`.\
+* `Calendar_Year` Only those years appear for a person in which they were recorded doing some job. If a person drops out of a survey or remains in the survey but is not employed, then they do not appear in this data for those years.\
+* `Job_ID` is an integer column containing unique identifier for every job done by a respondent. In the survey a 'Job' is defined as an employer and not as a combination of employer and role. Hence, if a person is promoted at the same employer or changes their role, it will not lead to a change in the `Job_ID`. Similarly if `Job_ID` 1 is assigned to the first employer of a respondent and the respondent return to the same employed after a stint at another employer, the `Job_ID` will again become 1.\
+* `Start_Year` is an integer indicating the year in which the 'Job_ID' was started. This variable is created using the primary variables that are named as 'EMPLOYERS_ALL_STARTDATE_ORIGINAL' in the survey data.\
+* `Stop_Year` is an integer indicating the year in which the 'Job_ID' was terminated for the 'PERSON_ID'. This variable is created using the primary variables that are named as 'EMPLOYERS_ALL_STOPDATE_MOST_RECENT' in the survey data.\
+\
+\
+#### job_type_data.csv\
+\
+* Columns: PERSON_ID, Survey_Year, Job_ID and Job_Type.\
+* Key: `PERSON_ID * Survey_Year * Job_ID`.\
+* `Job_Type` column contains integers in `[-3,-2,-1,1,2,3,4,5,6]` indicating respective responses invalid skip, don't know, refusal, private company, government, self-employment, without pay, non-profit organisation, working for family business.\
+\
+\
+#### jobs_data.csv\
+\
+* This file contains secondary variables i.e. variables that are not directly available in the survey data but have been derived from it.\
+* Columns: PERSON_ID, Calendar_Year, Switch_Job_1, Switch_Job_2, N_Jobs and Total_Jobs.\
+* Key: `PERSON_ID * Calendar_Year`.\
+* `Calendar_Year` Only those years appear for a person in which they were recorded doing some job. If a person drops out of a survey or remains in the survey but is not employed, then they do not appear in this data for those years.\
+* The following variable were created using information on the 'Start_Year' and 'Stop_Year' columns in 'job_history_data.csv'.\
+* `Switch_Job_1` column is a binary variable that takes value 1 if the 'PERSON_ID' starts a new job and ends any job in the calendar year. \
+* `Switch_Job_2` column is a binary variable that takes value 1 if the 'PERSON_ID' starts a new job in the calendar year.\
+* `N_Jobs` is an integer variable that counts the number of jobs held by the 'PERSON_ID' in a given calendar year during which they were working and recorded in the data.\
+* `Total_Jobs` is an integer variable that counts the total number of jobs held during the observed working life of the 'PERSON_ID'.\
+\
+\
+}
